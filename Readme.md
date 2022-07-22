@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [Stanislav Vasilyev](https://up.htmlacademy.ru/react/10/user/1895687).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
