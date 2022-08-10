@@ -7,7 +7,8 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found/not-found';
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
+import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
   promoFilmInfo: FilmInfo
@@ -19,7 +20,14 @@ function App({promoFilmInfo}:AppScreenProps): JSX.Element {
       <Routes>
         <Route path={ AppRoute.Main } element={ <MainScreen promoFilmInfo={promoFilmInfo}/> } />
         <Route path={ AppRoute.SignIn }element={ <SignInScreen/> } />
-        <Route path={ AppRoute.MyList } element={ <MyListScreen/> } />
+        <Route path={ AppRoute.MyList } element={
+          <PrivateRoute
+            authorizationStatus={AuthorizationStatus.Unauth}
+          >
+            <MyListScreen/>
+          </PrivateRoute>
+        }
+        />
         <Route path={ AppRoute.Film } element={ <FilmScreen/> } />
         <Route path={ AppRoute.AddReview } element={ <AddReviewScreen/> } />
         <Route path={ AppRoute.Player } element={ <PlayerScreen/> } />
