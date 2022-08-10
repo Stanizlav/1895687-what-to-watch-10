@@ -1,6 +1,13 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 import FilmInfo from '../../types/film-info';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
+import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+import FilmScreen from '../../pages/film-screen/film-screen';
+import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
+import PlayerScreen from '../../pages/player-screen/player-screen';
+import NotFoundScreen from '../../pages/not-found/not-found';
+import { AppRoute } from '../../consts';
 
 type AppScreenProps = {
   promoFilmInfo: FilmInfo
@@ -8,7 +15,17 @@ type AppScreenProps = {
 
 function App({promoFilmInfo}:AppScreenProps): JSX.Element {
   return (
-    <MainScreen promoFilmInfo={promoFilmInfo}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path={ AppRoute.Main } element={ <MainScreen promoFilmInfo={promoFilmInfo}/> } />
+        <Route path={ AppRoute.SignIn }element={ <SignInScreen/> } />
+        <Route path={ AppRoute.MyList } element={ <MyListScreen/> } />
+        <Route path={ AppRoute.Film } element={ <FilmScreen/> } />
+        <Route path={ AppRoute.AddReview } element={ <AddReviewScreen/> } />
+        <Route path={ AppRoute.Player } element={ <PlayerScreen/> } />
+        <Route path={ AppRoute.Other } element={ <NotFoundScreen/> } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
