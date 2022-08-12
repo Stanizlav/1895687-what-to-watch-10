@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import FilmInfo from './types/film-info';
-import Genre from './types/genre';
+import { Genre } from './consts';
 
 const promoFilmInfo: FilmInfo = {
   name: 'The Grand Budapest Hotel',
