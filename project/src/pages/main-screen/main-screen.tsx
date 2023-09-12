@@ -1,15 +1,15 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { AppRoute, DEFAULT_FILMS_COUNT } from '../../consts';
+import FilmsList from '../../components/films-list/films-list';
+import { AppRoute } from '../../consts';
 import FilmInfo from '../../types/film-info';
 
 type MainScreenProps = {
-  promoFilmInfo: FilmInfo
+  promoFilmInfo: FilmInfo;
+  films: FilmInfo[]
 };
 
-const filmCards: JSX.Element[] = Array.from(Array(DEFAULT_FILMS_COUNT), SmallFilmCard);
-
-function MainScreen ({ promoFilmInfo }: MainScreenProps): JSX.Element {
-  const {name, genre, year} = promoFilmInfo;
+function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
+  const {name, posterImage, backgroundImage, genre, released} = promoFilmInfo;
+  const altPoster = `${name} poster`;
   return (
     <>
       <div className="visually-hidden">
@@ -46,7 +46,7 @@ function MainScreen ({ promoFilmInfo }: MainScreenProps): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -75,14 +75,14 @@ function MainScreen ({ promoFilmInfo }: MainScreenProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={altPoster} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
               <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -141,11 +141,7 @@ function MainScreen ({ promoFilmInfo }: MainScreenProps): JSX.Element {
               <a href={AppRoute.Main} className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-
-          <div className="catalog__films-list">
-            {filmCards.map((item)=>item)}
-          </div>
-
+          <FilmsList films={films}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

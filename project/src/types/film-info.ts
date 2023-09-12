@@ -1,9 +1,23 @@
 import { Genre } from '../consts';
 
 type FilmInfo = {
-    name:string,
+    id: number,
+    name: string,
+    posterImage: string,
+    previewImage: string,
+    backgroundImage: string,
+    backgroundColor: string,
+    videoLink: string,
+    previewVideoLink: string,
+    description: string,
+    rating: number,
+    scoresCount: number,
+    director: string,
+    starring: string[],
+    runTime: number,
     genre: Genre,
-    year: number
+    released: number,
+    isFavorite: boolean
 };
 
 export default FilmInfo;

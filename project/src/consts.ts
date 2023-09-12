@@ -10,7 +10,8 @@ export enum AppRoute {
 
 export enum Genre {
   Drama = 'Drama',
-  Comedy = 'Comedy'
+  Comedy = 'Comedy',
+  Thriller = 'Thriller'
 }
 
 export enum AuthorizationStatus {

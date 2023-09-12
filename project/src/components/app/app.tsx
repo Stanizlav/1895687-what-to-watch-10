@@ -11,14 +11,15 @@ import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
-  promoFilmInfo: FilmInfo
+  promoFilmInfo: FilmInfo,
+  films: FilmInfo[]
 };
 
-function App({promoFilmInfo}:AppScreenProps): JSX.Element {
+function App({promoFilmInfo, films}:AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ AppRoute.Main } element={ <MainScreen promoFilmInfo={promoFilmInfo}/> } />
+        <Route path={ AppRoute.Main } element={ <MainScreen promoFilmInfo={promoFilmInfo} films={films}/> } />
         <Route path={ AppRoute.SignIn }element={ <SignInScreen/> } />
         <Route path={ AppRoute.MyList } element={
           <PrivateRoute
