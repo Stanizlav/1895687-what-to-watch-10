@@ -23,9 +23,9 @@ function App({promoFilmInfo, films}:AppScreenProps): JSX.Element {
         <Route path={ AppRoute.SignIn }element={ <SignInScreen/> } />
         <Route path={ AppRoute.MyList } element={
           <PrivateRoute
-            authorizationStatus={AuthorizationStatus.Unauth}
+            authorizationStatus={AuthorizationStatus.Auth}
           >
-            <MyListScreen/>
+            <MyListScreen films={films}/>
           </PrivateRoute>
         }
         />
