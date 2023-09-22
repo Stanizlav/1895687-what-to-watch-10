@@ -1,6 +1,23 @@
+import { useParams } from 'react-router-dom';
 import Icon from '../../components/icon/icon';
+import FilmInfo from '../../types/film-info';
+import NotFoundScreen from '../not-found/not-found';
+import getTimeInfo from '../../utils/get-time-info';
 
-function PlayerScreen(): JSX.Element {
+type PlayerScreenProps = {
+  films: FilmInfo[]
+};
+
+function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
+  const params = useParams();
+  const id = Number(params.id);
+  const film = films.find((element)=>element.id === id);
+  if(!film){
+    return <NotFoundScreen/>;
+  }
+  const {runTime} = film;
+  const {hours, minutes} = getTimeInfo(runTime);
+  const formattedDuration = `${hours}:${minutes}:00`;
   return(
     <>
       <Icon/>
@@ -21,7 +38,7 @@ function PlayerScreen(): JSX.Element {
                 Toggler
               </div>
             </div>
-            <div className="player__time-value">1:30:29</div>
+            <div className="player__time-value">{formattedDuration}</div>
           </div>
 
           <div className="player__controls-row">

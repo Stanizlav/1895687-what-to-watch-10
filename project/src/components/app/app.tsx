@@ -22,16 +22,14 @@ function App({promoFilmInfo, films}:AppScreenProps): JSX.Element {
         <Route path={ AppRoute.Main } element={ <MainScreen promoFilmInfo={promoFilmInfo} films={films}/> } />
         <Route path={ AppRoute.SignIn }element={ <SignInScreen/> } />
         <Route path={ AppRoute.MyList } element={
-          <PrivateRoute
-            authorizationStatus={AuthorizationStatus.Auth}
-          >
+          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
             <MyListScreen films={films}/>
           </PrivateRoute>
         }
         />
-        <Route path={ AppRoute.Film } element={ <FilmScreen/> } />
+        <Route path={ AppRoute.Film } element={ <FilmScreen films={films}/> } />
         <Route path={ AppRoute.AddReview } element={ <AddReviewScreen films={films}/> } />
-        <Route path={ AppRoute.Player } element={ <PlayerScreen/> } />
+        <Route path={ AppRoute.Player } element={ <PlayerScreen films={films}/> } />
         <Route path={ AppRoute.Other } element={ <NotFoundScreen/> } />
       </Routes>
     </BrowserRouter>
