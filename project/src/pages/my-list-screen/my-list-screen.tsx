@@ -1,6 +1,8 @@
 import FilmsList from '../../components/films-list/films-list';
 import Icon from '../../components/icon/icon';
+import Logo from '../../components/logo/logo';
 import PageFooter from '../../components/page-footer/page-footer';
+import UserBlock from '../../components/user-block/user-block';
 import FilmInfo from '../../types/film-info';
 
 type MyListScreenProps = {
@@ -8,37 +10,22 @@ type MyListScreenProps = {
 };
 
 function MyListScreen({films}: MyListScreenProps): JSX.Element {
-  const myfilms = films.filter((film)=>film.isFavorite);
+  const myFilms = films.filter((film)=>film.isFavorite);
   return(
     <>
       <Icon/>
       <div className="user-page">
         <header className="page-header user-page__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo/>
 
-          <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myfilms.length}</span></h1>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myFilms.length}</span></h1>
+          <UserBlock/>
         </header>
 
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilmsList films={myfilms}/>
+          <FilmsList films={myFilms}/>
         </section>
         <PageFooter/>
       </div>
