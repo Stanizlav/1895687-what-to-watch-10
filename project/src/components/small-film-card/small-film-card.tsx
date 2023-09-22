@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../consts';
+
 type SmallFilmCardProps = {
   id: number;
   name: string;
@@ -8,6 +11,7 @@ type SmallFilmCardProps = {
 function SmallFilmCard({id = 0, name = '', previewImage = '', onMouseOver}:SmallFilmCardProps):JSX.Element{
 
   const handleMouseOver = () => onMouseOver(id);
+  const filmLink = `${AppRoute.Films}${id}`;
 
   return (
     <article className="small-film-card catalog__films-card" onMouseOver={handleMouseOver}>
@@ -15,7 +19,7 @@ function SmallFilmCard({id = 0, name = '', previewImage = '', onMouseOver}:Small
         <img src={previewImage} alt={name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{name}</a>
+        <Link className="small-film-card__link" to={filmLink}>{name}</Link>
       </h3>
     </article>
   );
