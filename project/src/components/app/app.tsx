@@ -30,7 +30,7 @@ function App({promoFilmInfo, films}:AppScreenProps): JSX.Element {
         }
         />
         <Route path={ AppRoute.Film } element={ <FilmScreen/> } />
-        <Route path={ AppRoute.AddReview } element={ <AddReviewScreen/> } />
+        <Route path={ AppRoute.AddReview } element={ <AddReviewScreen films={films}/> } />
         <Route path={ AppRoute.Player } element={ <PlayerScreen/> } />
         <Route path={ AppRoute.Other } element={ <NotFoundScreen/> } />
       </Routes>

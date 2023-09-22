@@ -14,7 +14,7 @@ type MainScreenProps = {
 function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
   const {name, posterImage, backgroundImage, genre, released} = promoFilmInfo;
   const altPoster = `${name} poster`;
-  const myListFilmsCount = films.filter((film)=>film.isFavorite).length;
+  const myFilmsListCount = films.filter((film)=>film.isFavorite).length;
   return (
     <>
       <Icon playIconAdded/>
@@ -55,7 +55,7 @@ function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{myListFilmsCount}</span>
+                  <span className="film-card__count">{myFilmsListCount}</span>
                 </button>
               </div>
             </div>
