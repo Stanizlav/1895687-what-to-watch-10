@@ -3,6 +3,7 @@ export enum AppRoute {
   SignIn = '/login',
   MyList = '/mylist',
   Film = '/films/:id',
+  Films = '/films/',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
   Other = '*'
@@ -10,7 +11,8 @@ export enum AppRoute {
 
 export enum Genre {
   Drama = 'Drama',
-  Comedy = 'Comedy'
+  Comedy = 'Comedy',
+  Thriller = 'Thriller'
 }
 
 export enum AuthorizationStatus {
