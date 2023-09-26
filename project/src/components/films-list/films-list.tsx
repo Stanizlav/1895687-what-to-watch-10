@@ -17,7 +17,7 @@ function FilmsList({films}:FilmsListProps): JSX.Element {
 
   return(
     <div className="catalog__films-list">
-      { films.map((item) => SmallFilmCard({...item, onMouseOver:handleIdChange}))}
+      { films.map((item) => SmallFilmCard({...item, onMouseEnter:handleIdChange}))}
     </div>
   );
 }
