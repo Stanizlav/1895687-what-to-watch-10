@@ -46,7 +46,15 @@ export const FILMS: FilmInfo[] = [
       'Bill Murray',
       'Edward Norton',
       'Jude Law',
-      'Willem Dafoe'
+      'Willem Dafoe',
+      'Saoirse Ronan',
+      'Tony Revoloru',
+      'Tilda Swinton',
+      'Tom Wilkinson',
+      'Owen Wilkinson',
+      'Adrien Brody',
+      'Ralph Fiennes',
+      'Jeff Goldblum'
     ],
     runTime: 100,
     genre: Genre.Drama,
