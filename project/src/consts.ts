@@ -9,6 +9,12 @@ export enum AppRoute {
   Other = '*'
 }
 
+export enum Tabs {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}
+
 export enum Genre {
   Drama = 'Drama',
   Comedy = 'Comedy',

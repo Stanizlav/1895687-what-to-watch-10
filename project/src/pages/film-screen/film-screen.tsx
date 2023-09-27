@@ -12,6 +12,8 @@ type FilmScreenProps = {
   films: FilmInfo[]
 };
 
+const FILMS_LIKE_COUNT = 4;
+
 function FilmScreen({films}:FilmScreenProps): JSX.Element {
   const params = useParams();
   const id = Number(params.id);
@@ -22,7 +24,7 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
 
   const {name, backgroundImage, genre, released } = film;
   const myFilmsListCount = films.filter((unit)=>unit.isFavorite).length;
-  const filmsLikeThis = films.filter((element) => (element.genre === genre) && element.id !== id);
+  const filmsLikeThis = films.filter((element) => (element.genre === genre) && element.id !== id).slice(0, FILMS_LIKE_COUNT);
   return(
     <>
       <Icon playIconAdded/>

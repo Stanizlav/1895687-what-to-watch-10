@@ -34,7 +34,6 @@ function SmallFilmCard({id, name, previewImage, previewVideoLink, onMouseEnter}:
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut}>
       <div className="small-film-card__image">
-        {/* <img src={previewImage} alt={name} width="280" height="175" /> */}
         <VideoPlayer src={previewVideoLink} poster={previewImage} isPlaying={isPlaying} muted loop reset/>
       </div>
       <h3 className="small-film-card__title">
