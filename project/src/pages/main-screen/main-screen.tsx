@@ -2,6 +2,7 @@ import FilmsList from '../../components/films-list/films-list';
 import Icon from '../../components/icon/icon';
 import Logo from '../../components/logo/logo';
 import PageFooter from '../../components/page-footer/page-footer';
+import StartPlayingLink from '../../components/start-playing-link/start-playing-link';
 import UserBlock from '../../components/user-block/user-block';
 import { AppRoute } from '../../consts';
 import FilmInfo from '../../types/film-info';
@@ -12,7 +13,7 @@ type MainScreenProps = {
 };
 
 function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
-  const {name, posterImage, backgroundImage, genre, released} = promoFilmInfo;
+  const {name, posterImage, backgroundImage, genre, released, id} = promoFilmInfo;
   const altPoster = `${name} poster`;
   const myFilmsListCount = films.filter((film)=>film.isFavorite).length;
   return (
@@ -44,12 +45,7 @@ function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <StartPlayingLink id={id}/>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>

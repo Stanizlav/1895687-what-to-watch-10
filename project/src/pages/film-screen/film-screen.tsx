@@ -7,6 +7,7 @@ import FilmInfo from '../../types/film-info';
 import NotFoundScreen from '../not-found/not-found';
 import FilmsList from '../../components/films-list/films-list';
 import FilmInfoTabs from '../../components/film-info-tabs/film-info-tabs';
+import StartPlayingLink from '../../components/start-playing-link/start-playing-link';
 
 type FilmScreenProps = {
   films: FilmInfo[]
@@ -50,12 +51,7 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <StartPlayingLink id={id}/>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
