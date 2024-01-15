@@ -6,7 +6,14 @@ export enum AppRoute {
   Films = '/films/',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
+  Play = '/player/',
   Other = '*'
+}
+
+export enum Tabs {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
 }
 
 export enum Genre {

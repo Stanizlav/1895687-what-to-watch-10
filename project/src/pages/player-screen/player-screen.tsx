@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Icon from '../../components/icon/icon';
 import FilmInfo from '../../types/film-info';
 import NotFoundScreen from '../not-found/not-found';
@@ -10,21 +10,25 @@ type PlayerScreenProps = {
 
 function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
   const params = useParams();
+  const navigate = useNavigate();
   const id = Number(params.id);
   const film = films.find((element)=>element.id === id);
   if(!film){
     return <NotFoundScreen/>;
   }
-  const {runTime} = film;
-  const {hours, minutes} = getTimeInfo(runTime);
+  const { runTime } = film;
+  const { hours, minutes } = getTimeInfo(runTime);
   const formattedDuration = `${hours}:${minutes}:00`;
+  const handleExitClick = () => {
+    navigate(-1);
+  };
   return(
     <>
       <Icon/>
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-        <button type="button" className="player__exit">Exit</button>
+        <button type="button" className="player__exit" onClick={handleExitClick}>Exit</button>
 
         <div className="player__controls">
           <div className="player__controls-row">

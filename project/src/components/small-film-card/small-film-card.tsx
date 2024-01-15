@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../consts';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
@@ -17,24 +17,25 @@ const NOT_PLAYING_TIME = 1000;
 function SmallFilmCard({id, name, previewImage, previewVideoLink, onMouseEnter}:SmallFilmCardProps):JSX.Element{
 
   const [isPlaying, setPlaying] = useState(INITIAL_PLAYING);
-  let timer: NodeJS.Timeout;
+  const timer : React.MutableRefObject<NodeJS.Timeout | undefined> = useRef();
 
   const handleMouseEnter = () => {
     onMouseEnter(id);
-    timer = setTimeout(()=>{
+    clearTimeout(timer.current);
+    timer.current = setTimeout(()=>{
       setPlaying(true);
     }, NOT_PLAYING_TIME);
   };
+
   const handleMouseOut = () => {
-    clearTimeout(timer);
+    clearTimeout(timer.current);
     setPlaying(false);
   };
   const filmLink = `${AppRoute.Films}${id}`;
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut}>
-      <div className="small-film-card__image">
-        {/* <img src={previewImage} alt={name} width="280" height="175" /> */}
+    <article className="small-film-card catalog__films-card">
+      <div className="small-film-card__image" onMouseEnter={handleMouseEnter} onMouseOut={handleMouseOut}>
         <VideoPlayer src={previewVideoLink} poster={previewImage} isPlaying={isPlaying} muted loop reset/>
       </div>
       <h3 className="small-film-card__title">

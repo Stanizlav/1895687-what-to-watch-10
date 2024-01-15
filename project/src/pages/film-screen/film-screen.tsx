@@ -6,11 +6,14 @@ import UserBlock from '../../components/user-block/user-block';
 import FilmInfo from '../../types/film-info';
 import NotFoundScreen from '../not-found/not-found';
 import FilmsList from '../../components/films-list/films-list';
-import getFilmRatingLevel from '../../utils/get-film-rating-level';
+import FilmInfoTabs from '../../components/film-info-tabs/film-info-tabs';
+import StartPlayingLink from '../../components/start-playing-link/start-playing-link';
 
 type FilmScreenProps = {
   films: FilmInfo[]
 };
+
+const FILMS_LIKE_COUNT = 4;
 
 function FilmScreen({films}:FilmScreenProps): JSX.Element {
   const params = useParams();
@@ -20,10 +23,9 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
     return <NotFoundScreen/>;
   }
 
-  const {name, posterImage, backgroundImage, description, rating, scoresCount, director, starring, genre, released } = film;
-  const altPoster = `${name} poster`;
+  const {name, backgroundImage, genre, released } = film;
   const myFilmsListCount = films.filter((unit)=>unit.isFavorite).length;
-  const filmsLikeThis = films.filter((element) => (element.genre === genre) && element.id !== id);
+  const filmsLikeThis = films.filter((element) => (element.genre === genre) && element.id !== id).slice(0, FILMS_LIKE_COUNT);
   return(
     <>
       <Icon playIconAdded/>
@@ -37,7 +39,6 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
 
           <header className="page-header film-card__head">
             <Logo/>
-
             <UserBlock/>
           </header>
 
@@ -50,12 +51,7 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <StartPlayingLink id={id}/>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -68,46 +64,7 @@ function FilmScreen({films}:FilmScreenProps): JSX.Element {
             </div>
           </div>
         </div>
-
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img src={posterImage} alt={altPoster} width="218" height="327" />
-            </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{getFilmRatingLevel(rating)}</span>
-                  <span className="film-rating__count">{scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{description}</p>
-
-                <p className="film-card__director"><strong>Director: {director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {starring.join(', ')} and other</strong></p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FilmInfoTabs film={film}/>
       </section>
 
       <div className="page-content">
