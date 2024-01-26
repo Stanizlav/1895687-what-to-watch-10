@@ -16,18 +16,12 @@ export enum Tabs {
   Reviews = 'Reviews'
 }
 
-export enum Genre {
-  Drama = 'Drama',
-  Comedy = 'Comedy',
-  Thriller = 'Thriller'
-}
-
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   Unauth = 'UNAUTH',
   Unknown = 'UNKNOWN'
 }
 
-const DEFAULT_FILMS_COUNT = 20;
+export const DEFAULT_FILMS_COUNT = 20;
 
-export{ DEFAULT_FILMS_COUNT };
+export const ALL_GENRES = 'All Genres';
