@@ -1,4 +1,3 @@
-import { Genre } from '../consts';
 import FilmInfo from '../types/film-info';
 
 export const FILMS: FilmInfo[] = [
@@ -25,7 +24,7 @@ export const FILMS: FilmInfo[] = [
       'Max von Sydow'
     ],
     runTime: 139,
-    genre: Genre.Thriller,
+    genre: 'Thriller',
     released: 2010,
     isFavorite: true
   },
@@ -57,7 +56,7 @@ export const FILMS: FilmInfo[] = [
       'Jeff Goldblum'
     ],
     runTime: 100,
-    genre: Genre.Drama,
+    genre: 'Drama',
     released: 2014,
     isFavorite: false
   },
@@ -69,7 +68,7 @@ export const FILMS: FilmInfo[] = [
     backgroundImage: '',
     backgroundColor: '',
     videoLink: '',
-    previewVideoLink: 'https://imdb-video.media-imdb.com/vi3857035801/1434659607842-pgv4ql-1448904931914.mp4?Expires=1694265307&Signature=t~3m5OqA4gOToLGJHXAXJpzyZnlHdNOoPEQTIXK99Zvvol6TrRYKG6uZ5obVgK9YniSGIQtF51aIgTNDMFbsuBsxiBWWCgr2nVutU2O3PavdqxJS8t-iapqhKKkKEYrkQi7ZKhTD-MzKuqERrSRLBvnhqW79toeB5~qe~5cMJn2r2m2SiwVKpNwqyXMZ-44gEYuhrcBNvi2ybreZXFP~4OOcQgl4mPVYmeKkuLu~xKNtX-tmm51hNj~Wa5TM3K44Gzoc5cIk1MFLYA2L9jkBMShBXPewlW6N6Q5Rb~q9dKj15cBki9vg2cJOGjiOtnyVhNNVmq5jgBnbb1yvuEon~w__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+    previewVideoLink: 'https://imdb-video.media-imdb.com/vi3857035801/1434659607842-pgv4ql-1448904931914.mp4?Expires=1705415170&Signature=rTURVdkuRjQMcjZci7nWRY4Ud7CwJIEMx9jTDAatqt6rAmDyTU69kv0zqR-VrN2XIB2EgQYle4dbgKUqDJCDvNRPMEoQP2ZTtjNd0e1QnfIJtdRDDlDwP3570rqBGPk9Ptm2DV0AmWkM7ft0raa29KuUN9WE5oeVmzYefsYu9abULwgJhTGv4xXf3MHg7gZ7VrUDrLiH5ALYj5NX6iTUg1xlbiXQ8WBYdum0U8sCDEedlRxJ7a80Pd6T8uijUYXW~AlAZ2hVEMoqPcygEgBeFLnxLHC~cux1xSwzvkTR3x2aTYDOOWvtF3ogPVOL-gWR0bRIJ-ctXzm4wLY0Ouf79g__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
     description: 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.',
     rating: 7.8,
     scoresCount: 216,
@@ -81,7 +80,7 @@ export const FILMS: FilmInfo[] = [
       'Will Poulter'
     ],
     runTime: 156,
-    genre: Genre.Drama,
+    genre: 'Drama',
     released: 2015,
     isFavorite: false
   },
@@ -109,7 +108,7 @@ export const FILMS: FilmInfo[] = [
       'Mike Myers '
     ],
     runTime: 135,
-    genre: Genre.Drama,
+    genre: 'Drama',
     released: 2018,
     isFavorite: true
   },
@@ -136,7 +135,7 @@ export const FILMS: FilmInfo[] = [
       'Jetsun Pema'
     ],
     runTime: 136,
-    genre: Genre.Drama,
+    genre: 'Adventure',
     released: 1997,
     isFavorite: false
   },
@@ -160,7 +159,7 @@ export const FILMS: FilmInfo[] = [
       'John Malkovich'
     ],
     runTime: 88,
-    genre: Genre.Comedy,
+    genre: 'Comedy',
     released: 2003,
     isFavorite: false
   },
@@ -184,7 +183,7 @@ export const FILMS: FilmInfo[] = [
       'Tim Robbins'
     ],
     runTime: 116,
-    genre: Genre.Thriller,
+    genre: 'Thriller',
     released: 2005,
     isFavorite: false
   },
@@ -207,7 +206,7 @@ export const FILMS: FilmInfo[] = [
       'Josh Brolin'
     ],
     runTime: 122,
-    genre: Genre.Thriller,
+    genre: 'Thriller',
     released: 2007,
     isFavorite: false
   }

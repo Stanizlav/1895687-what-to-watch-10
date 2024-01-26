@@ -1,5 +1,3 @@
-import { Genre } from '../consts';
-
 type FilmInfo = {
     id: number,
     name: string,
@@ -15,7 +13,7 @@ type FilmInfo = {
     director: string,
     starring: string[],
     runTime: number,
-    genre: Genre,
+    genre: string,
     released: number,
     isFavorite: boolean
 };
