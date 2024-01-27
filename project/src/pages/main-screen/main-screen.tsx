@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import FilmsList from '../../components/films-list/films-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Icon from '../../components/icon/icon';
@@ -9,6 +9,8 @@ import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks/store-hooks';
 import FilmInfo from '../../types/film-info';
 import { fetchFilms } from '../../store/actions';
+import RevealingButton from '../../components/revealing-button/revealing-button';
+import { DEFAULT_FILMS_COUNT } from '../../consts';
 
 type MainScreenProps = {
   promoFilmInfo: FilmInfo;
@@ -16,11 +18,22 @@ type MainScreenProps = {
 };
 
 function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
   const {name, posterImage, backgroundImage, genre, released, id} = promoFilmInfo;
   const altPoster = `${name} poster`;
-  const presentedFilms = useAppSelector((state) => state.filteredFilms);
+  const dispatch = useAppDispatch();
+  const filteredFilms = useAppSelector((state) => state.filteredFilms);
   const favoriteFilmsListCount = useAppSelector((state) => state.favoriteFilms).length;
+  const [filmsLimit, setFilmsLimit] = useState(DEFAULT_FILMS_COUNT);
+  const presentedFilms = filteredFilms.slice(0, filmsLimit);
+  const isRevealingButtonHidden = presentedFilms.length === filteredFilms.length;
+
+  const handleRevealingButtonClick = ()=>{
+    setFilmsLimit((limit) => limit + DEFAULT_FILMS_COUNT);
+  };
+
+  const handleGenreChange = () => {
+    setFilmsLimit(DEFAULT_FILMS_COUNT);
+  };
 
   useEffect(()=>{
     dispatch(fetchFilms({films}));
@@ -68,11 +81,9 @@ function MainScreen ({ promoFilmInfo, films }: MainScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList/>
+          <GenreList onGenreChenge={handleGenreChange}/>
           <FilmsList films={presentedFilms}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <RevealingButton onClick={handleRevealingButtonClick} isHidden={isRevealingButtonHidden}/>
         </section>
         <PageFooter/>
       </div>

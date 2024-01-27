@@ -8,6 +8,7 @@ import pluralize from 'pluralize';
 type GenreListUnitProps = {
   genre: string,
   isActive: boolean,
+  onGenreChange?: ()=>void
 };
 
 const getGenreExtractCaption = (genre:string) => {
@@ -17,7 +18,7 @@ const getGenreExtractCaption = (genre:string) => {
   return pluralize.plural(genre);
 };
 
-function GenreListUnit({genre, isActive}:GenreListUnitProps):JSX.Element{
+function GenreListUnit({genre, isActive, onGenreChange}:GenreListUnitProps):JSX.Element{
   const title = getGenreExtractCaption(genre);
   const classList = `catalog__genres-item${isActive ? ' catalog__genres-item--active' : ''}`;
   const dispatch = useAppDispatch();
@@ -28,6 +29,9 @@ function GenreListUnit({genre, isActive}:GenreListUnitProps):JSX.Element{
       return;
     }
     dispatch(choosingGenre({genre}));
+    if(onGenreChange){
+      onGenreChange();
+    }
   };
 
   return(

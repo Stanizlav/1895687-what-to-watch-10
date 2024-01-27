@@ -209,6 +209,29 @@ export const FILMS: FilmInfo[] = [
     genre: 'Thriller',
     released: 2007,
     isFavorite: false
+  },
+  {
+    id: 8,
+    name: 'No Country',
+    posterImage: 'img/no-country-for-old-men.jpg',
+    previewImage: 'img/no-country-for-old-men.jpg',
+    backgroundImage: '',
+    backgroundColor: '',
+    videoLink: '',
+    previewVideoLink: 'https://imdb-video.media-imdb.com/vi2749088793/1434659607842-pgv4ql-1677908998394.mp4?Expires=1694265756&Signature=X53s3DJRVmiVADj5G2cRCDeOKSByhvPB1kcXyqJKeQfrCLHVx-xGQHO8f7PSn4kapCP2vtH4bF4jDGYOeU35SHhaG5yeZDE~oHQtbX7vEIf~2z2YKYpsCfLn7gGgRSGNb8DHjKQT0qM9dFAZHWejwROkAUxfBKOM5f-L0W6iUZcyZS9A0n6ZT70OT0UK32WwxyGn6JMD3lmfwmLEwnySKOJNLENWOKj8Om1Wvke5VA8FDYw7Ss1euI4Ja-ivVI5mgtjg2UDZ85HbvQ0A9ef0TP4sKvmOLlDgROTO-R~30-x1nZQJSEW3EKt0DIMbAABVvqaCX-1BN1V-6jZBjtDvKg__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+    description: 'Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong...',
+    rating: 9,
+    scoresCount: 94,
+    director: 'Joel Coen & Ethan Coen',
+    starring: [
+      'Tommy Lee Jones',
+      'Javier Bardem',
+      'Josh Brolin'
+    ],
+    runTime: 122,
+    genre: 'Thriller',
+    released: 2007,
+    isFavorite: false
   }
 ];
 

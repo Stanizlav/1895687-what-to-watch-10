@@ -22,6 +22,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export const DEFAULT_FILMS_COUNT = 20;
+export const DEFAULT_FILMS_COUNT = 8;
 
 export const ALL_GENRES = 'All Genres';
