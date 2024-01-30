@@ -1,0 +1,20 @@
+.spinning{
+  position: fixed;
+  border: 10px solid lawngreen;
+  border-top: 10px solid aqua;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  animation: spin infinite linear 2s
+}
+
+@keyframes spin {
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360);
+  }
+}

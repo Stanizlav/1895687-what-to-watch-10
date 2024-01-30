@@ -1,15 +1,19 @@
 import { PayloadAction, createReducer } from '@reduxjs/toolkit';
 import { CommonProcess } from '../types/state';
-import { choosingGenre, fetchFilms } from './actions';
+import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, setReviewsLoading, startSpinning, unsetReviewsLoading } from './actions';
 import FilmInfo from '../types/film-info';
 import { ALL_GENRES } from '../consts';
 
 const initialState: CommonProcess = {
+  spinning: false,
+  isReviewsLoading: false,
   genresList: [],
   activeGenre: ALL_GENRES,
+  promoFilm: undefined,
   films: [],
   filteredFilms: [],
-  favoriteFilms: []
+  favoriteFilms: [],
+  reviews: []
 };
 
 const getGenres = (films: FilmInfo[]) => {
@@ -37,13 +41,33 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeGenre = genre;
       state.filteredFilms = getFilteredFilms(state);
     })
-    .addCase(fetchFilms, (state, action) => {
+    .addCase(insertFilms, (state, action) => {
       const { films } = action.payload;
       state.films = films;
       state.activeGenre = ALL_GENRES;
       state.genresList = getGenres(films);
       state.filteredFilms = getFilteredFilms(state);
       state.favoriteFilms = films.filter((film)=>film.isFavorite);
+    })
+    .addCase(insertPromo, (state, action)=>{
+      const { promoFilm } = action.payload;
+      state.promoFilm = promoFilm;
+    })
+    .addCase(insertComments, (state, action)=>{
+      const { reviews } = action.payload;
+      state.reviews = reviews;
+    })
+    .addCase(startSpinning, (state)=>{
+      state.spinning = true;
+    })
+    .addCase(ceaseSpinning, (state)=>{
+      state.spinning = false;
+    })
+    .addCase(setReviewsLoading, (state)=>{
+      state.isReviewsLoading = true;
+    })
+    .addCase(unsetReviewsLoading, (state)=>{
+      state.isReviewsLoading = false;
     });
 });
 
