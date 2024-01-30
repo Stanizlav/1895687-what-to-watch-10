@@ -16,7 +16,7 @@ function ActiveTab({film, tab}:ActiveTabProps):JSX.Element | null{
     case Tabs.Details:
       return <DetailsTab film={film}/>;
     case Tabs.Reviews:
-      return <ReviewsTab film={film}/>;
+      return <ReviewsTab/>;
 
     default:
       return null;

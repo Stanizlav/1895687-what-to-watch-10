@@ -1,17 +1,14 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import Icon from '../../components/icon/icon';
-import FilmInfo from '../../types/film-info';
 import NotFoundScreen from '../not-found/not-found';
 import getTimeInfo from '../../utils/get-time-info';
+import { useAppSelector } from '../../hooks/store-hooks/store-hooks';
 
-type PlayerScreenProps = {
-  films: FilmInfo[]
-};
-
-function PlayerScreen({films}: PlayerScreenProps): JSX.Element {
+function PlayerScreen(): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
   const id = Number(params.id);
+  const films = useAppSelector((state)=>state.films);
   const film = films.find((element)=>element.id === id);
   if(!film){
     return <NotFoundScreen/>;

@@ -1,6 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
 import NameSpace from '../types/name-space';
 import FilmInfo from '../types/film-info';
+import Review from '../types/review';
 
 export const choosingGenre = createAction<{genre: string}>(`${NameSpace.Application}/choosing-genre`);
-export const fetchFilms = createAction<{films: FilmInfo[]}>(`${NameSpace.Data}/fetching-films`);
+export const insertFilms = createAction<{films: FilmInfo[]}>(`${NameSpace.Data}/films-insertion`);
+export const insertPromo = createAction<{promoFilm: FilmInfo | undefined}>(`${NameSpace.Data}/promo-film-insertion`);
+export const insertComments = createAction<{reviews: Review[]}>(`${NameSpace.Data}/comments-insertion`);
+export const startSpinning = createAction(`${NameSpace.Data}/start-spinning`);
+export const ceaseSpinning = createAction(`${NameSpace.Data}/cease-spinning`);
+export const setReviewsLoading = createAction(`${NameSpace.Data}/reviews-start-loading`);
+export const unsetReviewsLoading = createAction(`${NameSpace.Data}/reviews-stop-loading`);

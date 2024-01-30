@@ -31,7 +31,7 @@ function SmallFilmCard({id, name, previewImage, previewVideoLink, onMouseEnter}:
     clearTimeout(timer.current);
     setPlaying(false);
   };
-  const filmLink = `${AppRoute.Films}${id}`;
+  const filmLink = AppRoute.Film.replace(':id', id.toString());
 
   return (
     <article className="small-film-card catalog__films-card">
