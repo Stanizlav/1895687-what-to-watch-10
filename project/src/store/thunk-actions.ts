@@ -2,10 +2,13 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import FilmInfo from '../types/film-info';
 import AdditionalUrl from '../types/additional-url';
-import { ceaseSpinning, insertComments, insertFilms, insertPromo, setReviewsLoading, startSpinning, unsetReviewsLoading } from './actions';
+import { ceaseSpinning, insertComments, insertFilms, insertPromo, redirection, setAuthorised, setReviewsLoading, setUnauthorised, startSpinning, unsetReviewsLoading } from './actions';
 import { toast } from 'react-toastify';
 import ApiErrorMessage from '../types/api-error-message';
 import Review from '../types/review';
+import AuthData from '../types/auth-data';
+import { saveToken } from '../services/token';
+import { AppRoute } from '../consts';
 
 export const downloadFilms = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
   dispatch(startSpinning());
@@ -24,7 +27,6 @@ export const downloadFilms = () => async (dispatch: AppDispatch, getState: () =>
 };
 
 export const downloadPromo = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
-  dispatch(startSpinning());
   await api.get<FilmInfo>(AdditionalUrl.Promo)
     .then((response)=>{
       const promoFilm = response.data;
@@ -34,13 +36,10 @@ export const downloadPromo = () => async (dispatch: AppDispatch, getState: () =>
       const promoFilm = undefined;
       dispatch(insertPromo({promoFilm}));
       toast.warn(ApiErrorMessage.PromoDownload);
-    })
-    .finally(()=>{
-      dispatch(ceaseSpinning());
     });
 };
 
-export const downloadComments = (id:number) => async (dispatch: AppDispatch, getState: ()=>State, api: AxiosInstance) => {
+export const downloadComments = (id:number) => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
   const url = `${AdditionalUrl.Comments}/${id}`;
   dispatch(setReviewsLoading());
   await api.get<Review[]>(url)
@@ -53,5 +52,28 @@ export const downloadComments = (id:number) => async (dispatch: AppDispatch, get
     })
     .finally(()=>{
       dispatch(unsetReviewsLoading());
+    });
+};
+
+export const authorisationCheck = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
+  await api.get(AdditionalUrl.Login)
+    .then((response)=>{
+      dispatch(setAuthorised(response.data));
+    })
+    .catch(()=>{
+      dispatch(setUnauthorised());
+    });
+};
+
+export const logIn = (authData: AuthData) => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
+  await api.post(AdditionalUrl.Login, authData)
+    .then((response)=>{
+      const {token} = response.data;
+      saveToken(token);
+      dispatch(setAuthorised(response.data));
+      dispatch(redirection(AppRoute.Main));
+    })
+    .catch(()=>{
+      toast.warn(ApiErrorMessage.Login);
     });
 };

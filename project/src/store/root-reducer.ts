@@ -1,10 +1,12 @@
 import { PayloadAction, createReducer } from '@reduxjs/toolkit';
 import { CommonProcess } from '../types/state';
-import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, setReviewsLoading, startSpinning, unsetReviewsLoading } from './actions';
+import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, setAuthorised, setReviewsLoading, setUnauthorised, startSpinning, unsetReviewsLoading } from './actions';
 import FilmInfo from '../types/film-info';
-import { ALL_GENRES } from '../consts';
+import { ALL_GENRES, AuthorisationStatus } from '../consts';
 
 const initialState: CommonProcess = {
+  authorisationStatus: AuthorisationStatus.Unauth,
+  user: null,
   spinning: false,
   isReviewsLoading: false,
   genresList: [],
@@ -68,6 +70,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(unsetReviewsLoading, (state)=>{
       state.isReviewsLoading = false;
+    })
+    .addCase(setAuthorised, (state, action)=>{
+      state.authorisationStatus = AuthorisationStatus.Auth;
+      state.user = action.payload;
+    })
+    .addCase(setUnauthorised, (state)=>{
+      state.authorisationStatus = AuthorisationStatus.Unauth;
     });
 });
 

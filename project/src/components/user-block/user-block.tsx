@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../consts';
+import { AppRoute, AuthorisationStatus } from '../../consts';
+import { useAppSelector } from '../../hooks/store-hooks/store-hooks';
+import AvatarIcon from '../avatar-icon/avatar-icon';
 
 function UserBlock():JSX.Element{
+  const authorisationStatus = useAppSelector((state) => state.authorisationStatus);
+  const isAuthorised = authorisationStatus === AuthorisationStatus.Auth;
+  const link = isAuthorised ? '' : AppRoute.SignIn;
+  const linkCaption = isAuthorised ? 'Sign out' : 'Sign in';
+
   return(
     <ul className="user-block">
+      { isAuthorised ? <li className="user-block__item"><AvatarIcon/></li> : null }
       <li className="user-block__item">
-        <div className="user-block__avatar">
-          <Link to={AppRoute.MyList}>
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </Link>
-        </div>
-      </li>
-      <li className="user-block__item">
-        <Link className="user-block__link" to={AppRoute.Main}>Sign out</Link>
+        <Link className="user-block__link" to={link}>{linkCaption}</Link>
       </li>
     </ul>
   );

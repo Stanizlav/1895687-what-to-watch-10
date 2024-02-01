@@ -1,12 +1,16 @@
 import FilmInfo from './film-info';
 import { store } from '../store';
 import Review from './review';
+import { AuthorisationStatus } from '../consts';
+import User from './user';
 
 export type ApplicationProcess = {
   genre: string
 };
 
 export type CommonProcess = {
+  authorisationStatus: AuthorisationStatus,
+  user: User | null,
   spinning: boolean,
   isReviewsLoading: boolean,
   genresList: string[],
