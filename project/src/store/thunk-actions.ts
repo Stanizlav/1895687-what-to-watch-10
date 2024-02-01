@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import ApiErrorMessage from '../types/api-error-message';
 import Review from '../types/review';
 import AuthData from '../types/auth-data';
-import { saveToken } from '../services/token';
+import { removeToken, saveToken } from '../services/token';
 import { AppRoute } from '../consts';
 
 export const downloadFilms = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
@@ -75,5 +75,16 @@ export const logIn = (authData: AuthData) => async (dispatch: AppDispatch, getSt
     })
     .catch(()=>{
       toast.warn(ApiErrorMessage.Login);
+    });
+};
+
+export const logOut = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
+  await api.delete(AdditionalUrl.Logout)
+    .then(()=>{
+      dispatch(setUnauthorised());
+      removeToken();
+    })
+    .catch(()=>{
+      toast.warn(ApiErrorMessage.Logout);
     });
 };
