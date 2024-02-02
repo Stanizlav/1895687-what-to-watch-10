@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from '@reduxjs/toolkit';
 import { CommonProcess } from '../types/state';
-import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, setAuthorised, setReviewsLoading, setUnauthorised, startSpinning, unsetReviewsLoading } from './actions';
+import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, insertSimilarFilms, insertTheFilm, setAuthorised, setReviewsLoading, setSending, setSendingError, setUnauthorised, startSpinning, unsetReviewsLoading, unsetSending, unsetSendingError } from './actions';
 import FilmInfo from '../types/film-info';
 import { ALL_GENRES, AuthorisationStatus } from '../consts';
 
@@ -15,7 +15,11 @@ const initialState: CommonProcess = {
   films: [],
   filteredFilms: [],
   favoriteFilms: [],
-  reviews: []
+  browsedFilm: undefined,
+  similarFilms: [],
+  reviews: [],
+  isReviewSending: false,
+  isSendingFailed: false
 };
 
 const getGenres = (films: FilmInfo[]) => {
@@ -51,33 +55,29 @@ const reducer = createReducer(initialState, (builder) => {
       state.filteredFilms = getFilteredFilms(state);
       state.favoriteFilms = films.filter((film)=>film.isFavorite);
     })
-    .addCase(insertPromo, (state, action)=>{
+    .addCase(insertPromo, (state, action) => {
       const { promoFilm } = action.payload;
       state.promoFilm = promoFilm;
     })
-    .addCase(insertComments, (state, action)=>{
+    .addCase(insertTheFilm, (state, action) => {state.browsedFilm = action.payload;})
+    .addCase(insertSimilarFilms, (state, action) => {state.similarFilms = action.payload;})
+    .addCase(insertComments, (state, action) => {
       const { reviews } = action.payload;
       state.reviews = reviews;
     })
-    .addCase(startSpinning, (state)=>{
-      state.spinning = true;
-    })
-    .addCase(ceaseSpinning, (state)=>{
-      state.spinning = false;
-    })
-    .addCase(setReviewsLoading, (state)=>{
-      state.isReviewsLoading = true;
-    })
-    .addCase(unsetReviewsLoading, (state)=>{
-      state.isReviewsLoading = false;
-    })
-    .addCase(setAuthorised, (state, action)=>{
+    .addCase(startSpinning, (state) => {state.spinning = true;})
+    .addCase(ceaseSpinning, (state) => {state.spinning = false;})
+    .addCase(setReviewsLoading, (state) => {state.isReviewsLoading = true;})
+    .addCase(unsetReviewsLoading, (state) => {state.isReviewsLoading = false;})
+    .addCase(setAuthorised, (state, action) => {
       state.authorisationStatus = AuthorisationStatus.Auth;
       state.user = action.payload;
     })
-    .addCase(setUnauthorised, (state)=>{
-      state.authorisationStatus = AuthorisationStatus.Unauth;
-    });
+    .addCase(setUnauthorised, (state) => {state.authorisationStatus = AuthorisationStatus.Unauth;})
+    .addCase(setSending, (state)=>{state.isReviewSending = true;})
+    .addCase(unsetSending, (state)=>{state.isReviewSending = false;})
+    .addCase(setSendingError, (state)=>{state.isSendingFailed = true;})
+    .addCase(unsetSendingError, (state)=>{state.isSendingFailed = false;});
 });
 
 export default reducer;

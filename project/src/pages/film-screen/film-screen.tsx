@@ -8,18 +8,20 @@ import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks/store-ho
 import Background from '../../components/background/background';
 import FilmPresentation from '../../components/film-presentation/film-presentation';
 import { useEffect } from 'react';
-import { downloadComments } from '../../store/thunk-actions';
+import { downloadComments, downloadSimilarFilms, downloadTheFilm } from '../../store/thunk-actions';
 
-const FILMS_LIKE_COUNT = 4;
+const FILMS_LIKE_LIMIT = 4;
 
 function FilmScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = Number(params.id);
-  const films = useAppSelector((state)=>state.films);
-  const film = films.find((element)=>element.id === id);
+  const film = useAppSelector((state) => state.browsedFilm);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
 
   useEffect(()=>{
+    dispatch(downloadTheFilm(id));
+    dispatch(downloadSimilarFilms(id));
     dispatch(downloadComments(id));
   },[dispatch, id]);
 
@@ -27,8 +29,11 @@ function FilmScreen(): JSX.Element {
     return <NotFoundScreen/>;
   }
 
-  const {name, backgroundImage, genre } = film;
-  const filmsLikeThis = films.filter((element) => (element.genre === genre) && element.id !== id).slice(0, FILMS_LIKE_COUNT);
+  const {name, backgroundImage} = film;
+  const presentedSimilarFilms = similarFilms
+    .filter((similar) => film.id !== similar.id)
+    .slice(0, FILMS_LIKE_LIMIT);
+
   return(
     <>
       <Icon playIconAdded/>
@@ -45,7 +50,7 @@ function FilmScreen(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={filmsLikeThis}/>
+          <FilmsList films={presentedSimilarFilms}/>
         </section>
         <PageFooter/>
       </div>

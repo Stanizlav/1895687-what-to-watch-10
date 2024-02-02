@@ -19,7 +19,11 @@ export type CommonProcess = {
   films: FilmInfo[],
   filteredFilms: FilmInfo[],
   favoriteFilms: FilmInfo[],
-  reviews: Review[]
+  browsedFilm: FilmInfo | undefined,
+  similarFilms: FilmInfo[],
+  reviews: Review[],
+  isReviewSending: boolean,
+  isSendingFailed: boolean
 };
 
 export type State = ReturnType<typeof store.getState>;
