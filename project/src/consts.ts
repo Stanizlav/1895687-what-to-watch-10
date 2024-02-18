@@ -14,12 +14,12 @@ export enum Tabs {
   Reviews = 'Reviews'
 }
 
-export enum AuthorizationStatus {
+export enum AuthorisationStatus {
   Auth = 'AUTH',
   Unauth = 'UNAUTH',
   Unknown = 'UNKNOWN'
 }
 
 export const DEFAULT_FILMS_COUNT = 8;
-
+export const REDIRECT_ACTION_TYPE = 'Application/redirection';
 export const ALL_GENRES = 'All Genres';
