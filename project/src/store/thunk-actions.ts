@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import FilmInfo from '../types/film-info';
 import AdditionalUrl from '../types/additional-url';
-import { ceaseSpinning, insertComments, insertFilms, insertPromo, insertSimilarFilms, insertTheFilm, redirection, setAuthorised, setReviewsLoading, setSending, setSendingError, setUnauthorised, startSpinning, unsetReviewsLoading, unsetSending, unsetSendingError } from './actions';
+import { ceaseSpinning, insertComments, insertFavoriteFilms, insertFilms, insertPromo, insertSimilarFilms, insertTheFilm, redirection, setAuthorised, setReviewsLoading, setSending, setSendingError, setUnauthorised, startSpinning, unsetReviewsLoading, unsetSending, unsetSendingError } from './actions';
 import { toast } from 'react-toastify';
 import ApiErrorMessage from '../types/api-error-message';
 import Review from '../types/review';
@@ -91,6 +91,18 @@ export const sendReview = (id: number, data: {comment: string, rating: number}) 
       })
       .finally(()=>{dispatch(unsetSending());});
   };
+
+export const downloadFavoriteFilms = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
+  await api.get<FilmInfo[]>(AdditionalUrl.FavoriteFilms)
+    .then((response)=>{ dispatch(insertFavoriteFilms(response.data)); })
+    .catch(()=>{ toast.warn(ApiErrorMessage.FavoriteFilmsDownload); });
+};
+
+export const setFavoriteStatus = (id: number, status: boolean) => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
+  await api.post<FilmInfo>(`${AdditionalUrl.FavoriteFilms}/${id}/${status ? '1' : '0'}`)
+    .then(()=>{ dispatch(downloadFavoriteFilms()); })
+    .catch(()=>{ toast.warn(ApiErrorMessage.SettingFavoriteStatus); });
+};
 
 export const authorisationCheck = () => async (dispatch: AppDispatch, getState: () => State, api: AxiosInstance) => {
   await api.get(AdditionalUrl.Login)

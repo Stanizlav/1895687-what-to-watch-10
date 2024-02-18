@@ -24,7 +24,7 @@ function FilmPresentation({film, isReviewable = false}: FilmPresentationProps):J
 
       <div className="film-card__buttons">
         <StartPlayingLink id={id}/>
-        { isAuthorised ? <AddingToFavorites/> : null }
+        { isAuthorised ? <AddingToFavorites film = {film}/> : null }
         { isAuthorised && isReviewable ? <ReviewLink id={id}/> : null}
       </div>
     </div>

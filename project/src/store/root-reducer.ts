@@ -1,6 +1,6 @@
 import { PayloadAction, createReducer } from '@reduxjs/toolkit';
 import { CommonProcess } from '../types/state';
-import { ceaseSpinning, choosingGenre, insertComments, insertFilms, insertPromo, insertSimilarFilms, insertTheFilm, setAuthorised, setReviewsLoading, setSending, setSendingError, setUnauthorised, startSpinning, unsetReviewsLoading, unsetSending, unsetSendingError } from './actions';
+import { ceaseSpinning, choosingGenre, insertComments, insertFavoriteFilms, insertFilms, insertPromo, insertSimilarFilms, insertTheFilm, setAuthorised, setReviewsLoading, setSending, setSendingError, setUnauthorised, startSpinning, unsetReviewsLoading, unsetSending, unsetSendingError } from './actions';
 import FilmInfo from '../types/film-info';
 import { ALL_GENRES, AuthorisationStatus } from '../consts';
 
@@ -53,8 +53,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeGenre = ALL_GENRES;
       state.genresList = getGenres(films);
       state.filteredFilms = getFilteredFilms(state);
-      state.favoriteFilms = films.filter((film)=>film.isFavorite);
     })
+    .addCase(insertFavoriteFilms, (state, action) => {state.favoriteFilms = action.payload;})
     .addCase(insertPromo, (state, action) => {
       const { promoFilm } = action.payload;
       state.promoFilm = promoFilm;
